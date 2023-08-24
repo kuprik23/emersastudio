@@ -1,9 +1,25 @@
-/* ... (previous CSS rules) */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 
 .container {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    width: 80%;
+    max-width: 1000px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .left, .middle, .right {
@@ -22,9 +38,56 @@
     text-align: left;
 }
 
+.cube-container {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    perspective: 600px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    background-color: #3498db;
+    transform-style: preserve-3d;
+    animation: rotate 5s infinite linear;
+}
+
+.control {
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+input[type="color"] {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+input[type="range"] {
+    width: 150px;
+    margin-left: 10px;
+}
+
 textarea {
     width: 100%;
     height: 200px;
 }
 
-/* ... (rest of CSS rules) */
+button {
+    margin-top: 10px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
