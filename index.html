@@ -8,22 +8,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>EMERSA STUDIO</h1>
-        <div class="cube-container">
-            <div class="cube" id="cube"></div>
+        <div class="left">
+            <h1>EMERSA STUDIO</h1>
+            <div class="cube-container">
+                <div class="cube" id="cube"></div>
+            </div>
         </div>
-        <div class="sliders">
-            <label for="type">Rotation:</label>
-            <input type="range" id="type" min="0" max="360">
-            <label for="personality">Personality:</label>
-            <input type="range" id="personality" min="1" max="3">
+        <div class="middle">
+            <h2>Controls</h2>
+            <div class="sliders">
+                <label for="rotation">Rotation:</label>
+                <input type="range" id="rotation" min="0" max="360">
+                <label for="size">Size:</label>
+                <input type="range" id="size" min="1" max="3" step="0.1">
+                <label for="personality">Personality:</label>
+                <input type="range" id="personality" min="1" max="3" step="0.1">
+            </div>
+            <button id="generate-code">Generate Code</button>
+            <button id="copy-code">Copy Code</button>
         </div>
-        <button id="generate-code">Generate Code</button>
+        <div class="right">
+            <h2>Generated Code</h2>
+            <textarea id="generated-code" readonly></textarea>
+        </div>
     </div>
-    <div class="code-container">
-        <textarea class="code" id="generated-code"></textarea>
-    </div>
-    <script src="three.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
