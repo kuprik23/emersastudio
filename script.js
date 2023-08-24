@@ -5,6 +5,9 @@ const personalitySlider = document.getElementById("personality");
 const generateCodeButton = document.getElementById("generate-code");
 const copyCodeButton = document.getElementById("copy-code");
 const generatedCode = document.getElementById("generated-code");
+const backstoryInput = document.getElementById("backstory");
+const uploadPictureButton = document.getElementById("upload-picture");
+const connectWalletButton = document.getElementById("connect-wallet");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -54,3 +57,28 @@ function copyCode() {
 
 // Event listener for the Copy Code button
 copyCodeButton.addEventListener("click", copyCode);
+
+// Event listener for Backstory input
+backstoryInput.addEventListener("input", () => {
+    // Store the backstory text if needed
+    const backstory = backstoryInput.value;
+    console.log("Backstory:", backstory);
+});
+
+// Function to handle picture upload
+function uploadPicture() {
+    // Implement picture upload logic here
+    console.log("Picture uploaded");
+}
+
+// Event listener for Upload Picture button
+uploadPictureButton.addEventListener("click", uploadPicture);
+
+// Function to handle wallet connection
+function connectWallet() {
+    // Implement wallet connection logic here
+    console.log("Wallet connected");
+}
+
+// Event listener for Connect Wallet button
+connectWalletButton.addEventListener("click", connectWallet);
