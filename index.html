@@ -13,8 +13,12 @@
             <div class="cube-container">
                 <div class="cube" id="cube"></div>
             </div>
+            <button id="upload-picture">Upload Picture</button>
+            <button id="connect-wallet">Connect Wallet</button>
         </div>
         <div class="middle">
+            <h2>Backstory</h2>
+            <textarea id="backstory" maxlength="3000"></textarea>
             <h2>Controls</h2>
             <div class="control">
                 <label for="color">Color:</label>
@@ -28,16 +32,12 @@
                 <label for="personality">Personality:</label>
                 <input type="range" id="personality" min="1" max="3" step="0.1">
             </div>
-            <button id="generate-code">Generate Pseudo Code</button>
-            <button id="copy-code">Copy Code</button>
+            <button id="generate-access-code">Generate Access Code</button>
+            <button id="copy-access-code">Copy Access Code</button>
         </div>
         <div class="right">
-            <h2>Pseudo Code</h2>
-            <textarea id="generated-code" readonly></textarea>
-            <h2>Backstory</h2>
-            <textarea id="backstory" maxlength="3000"></textarea>
-            <button id="upload-picture">Upload Picture</button>
-            <button id="connect-wallet">Connect Wallet</button>
+            <h2>Access Code</h2>
+            <textarea id="access-code" readonly></textarea>
         </div>
     </div>
     <script src="script.js"></script>

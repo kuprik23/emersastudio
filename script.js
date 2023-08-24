@@ -2,9 +2,9 @@ const cube = document.getElementById("cube");
 const colorInput = document.getElementById("color");
 const sizeSlider = document.getElementById("size");
 const personalitySlider = document.getElementById("personality");
-const generateCodeButton = document.getElementById("generate-code");
-const copyCodeButton = document.getElementById("copy-code");
-const generatedCode = document.getElementById("generated-code");
+const generateAccessCodeButton = document.getElementById("generate-access-code");
+const copyAccessCodeButton = document.getElementById("copy-access-code");
+const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
@@ -26,37 +26,37 @@ colorInput.addEventListener("input", updateCube);
 sizeSlider.addEventListener("input", updateCube);
 personalitySlider.addEventListener("input", updateCube);
 
-// Function to generate pseudo code based on the slider values
-function generateCode() {
+// Function to generate access code based on the slider values
+function generateAccessCode() {
     const colorValue = colorInput.value;
     const sizeValue = sizeSlider.value;
     const personalityValue = personalitySlider.value;
 
-    // Generate pseudo code based on the slider values
+    // Generate access code based on the slider values
     const code = `
-        // Create a customizable 3D cube with the following properties:
+        // Access Code for Your Custom Avatar:
         // Color: "${colorValue}"
         // Size: ${sizeValue}
         // Personality: ${personalityValue}
         
-        // Add your code to create the cube here
+        // Use this code to access your custom avatar.
     `;
 
-    // Display the generated pseudo code
-    generatedCode.value = code;
+    // Display the generated access code
+    accessCode.value = code;
 }
 
-// Event listener for the Generate Pseudo Code button
-generateCodeButton.addEventListener("click", generateCode);
+// Event listener for the Generate Access Code button
+generateAccessCodeButton.addEventListener("click", generateAccessCode);
 
-// Function to copy generated pseudo code to the clipboard
-function copyCode() {
-    generatedCode.select();
+// Function to copy generated access code to the clipboard
+function copyAccessCode() {
+    accessCode.select();
     document.execCommand("copy");
 }
 
-// Event listener for the Copy Code button
-copyCodeButton.addEventListener("click", copyCode);
+// Event listener for the Copy Access Code button
+copyAccessCodeButton.addEventListener("click", copyAccessCode);
 
 // Event listener for Backstory input
 backstoryInput.addEventListener("input", () => {
