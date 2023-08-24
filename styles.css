@@ -51,6 +51,7 @@ body {
     background-color: #3498db;
     transform-style: preserve-3d;
     animation: rotate 5s infinite linear;
+    transform: rotateX(45deg) rotateY(45deg);
 }
 
 .control {
@@ -67,11 +68,6 @@ input[type="color"] {
     width: 35px;
     height: 35px;
     vertical-align: middle;
-}
-
-input[type="text"] {
-    width: 150px;
-    margin-left: 10px;
 }
 
 input[type="range"] {
