@@ -61,6 +61,10 @@ button {
     margin: 5px;
 }
 
+#integration-platform {
+    margin-top: 10px;
+}
+
 .code {
     margin-top: 20px;
     white-space: pre-wrap;

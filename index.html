@@ -15,10 +15,14 @@
         <div class="sliders">
             <label for="type">Type:</label>
             <input type="range" id="type" min="0" max="360">
-            <!-- Add similar sliders for other properties -->
+            <!-- Add similar sliders for other properties (personality, size, introvert, extrovert, color) -->
         </div>
         <button id="generate-code">Generate Code</button>
-        <button id="copy-code">Copy Code</button>
+        <select id="integration-platform">
+            <option value="unreal">Unreal Engine</option>
+            <option value="unity">Unity</option>
+            <option value="webgl">WebGL</option>
+        </select>
         <div class="code" id="generated-code"></div>
     </div>
     <script src="script.js"></script>
