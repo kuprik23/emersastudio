@@ -13,18 +13,17 @@
             <div class="cube" id="cube"></div>
         </div>
         <div class="sliders">
-            <label for="type">Type:</label>
+            <label for="type">Rotation:</label>
             <input type="range" id="type" min="0" max="360">
-            <!-- Add similar sliders for other properties (personality, size, introvert, extrovert, color) -->
+            <label for="personality">Personality:</label>
+            <input type="range" id="personality" min="1" max="3">
         </div>
         <button id="generate-code">Generate Code</button>
-        <select id="integration-platform">
-            <option value="unreal">Unreal Engine</option>
-            <option value="unity">Unity</option>
-            <option value="webgl">WebGL</option>
-        </select>
-        <div class="code" id="generated-code"></div>
     </div>
+    <div class="code-container">
+        <textarea class="code" id="generated-code"></textarea>
+    </div>
+    <script src="three.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

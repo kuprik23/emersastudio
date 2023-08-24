@@ -1,40 +1,61 @@
-const cube = document.getElementById("cube");
-const typeSlider = document.getElementById("type");
-// Add similar variables for other sliders (personality, size, introvert, extrovert, color)
-const integrationPlatformSelect = document.getElementById("integration-platform");
+// Initialize Three.js variables
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-const generatedCode = document.getElementById("generated-code");
-const generateCodeButton = document.getElementById("generate-code");
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x3498db });
+const cube = new THREE.Mesh(geometry, material);
+
+scene.add(cube);
+
+camera.position.z = 5;
 
 // Function to update the cube's rotation and shape based on the slider values
 function updateCube() {
-    const typeValue = typeSlider.value;
-    // Get values from other sliders and adjust the cube's appearance as needed
+    const rotationValue = typeSlider.value;
+    cube.rotation.x = (rotationValue * Math.PI) / 180; // Convert degrees to radians
 
-    cube.style.transform = `rotateX(${typeValue}deg)`;
-    // Add code to change the cube's shape based on the personality slider value
+    const personalityValue = personalitySlider.value;
+    // Change cube's shape based on personality slider (e.g., scale it)
+    cube.scale.set(1, 1, personalityValue);
 }
 
-// Function to generate code based on the slider values and selected integration platform
-function generateCode() {
-    const typeValue = typeSlider.value;
-    // Get values from other sliders and the selected integration platform
+// Event listeners for slider changes
+const typeSlider = document.getElementById("type");
+typeSlider.addEventListener("input", updateCube);
 
-    // Generate code based on the slider values and integration platform
+const personalitySlider = document.getElementById("personality");
+personalitySlider.addEventListener("input", updateCube);
+
+// Function to generate code based on the slider values
+function generateCode() {
+    const rotationValue = typeSlider.value;
+    const personalityValue = personalitySlider.value;
+
+    // Generate code based on the slider values
     const code = `
-        // Add code here to create a rotating and shape-changing cube with the selected properties
-        // Type: ${typeValue}
-        // Add other properties here
-        // Integration Platform: ${integrationPlatformSelect.value}
+        // Add code here to create a rotating cube with the selected properties
+        // Rotation: ${rotationValue} degrees
+        // Personality: ${personalityValue}
     `;
 
     // Display the generated code
     generatedCode.textContent = code;
 }
 
-// Event listeners for slider changes
-typeSlider.addEventListener("input", updateCube);
-// Add similar listeners for other sliders
-
 // Event listener for the Generate Code button
+const generateCodeButton = document.getElementById("generate-code");
 generateCodeButton.addEventListener("click", generateCode);
+
+// Function to animate the cube
+function animate() {
+    requestAnimationFrame(animate);
+
+    renderer.render(scene, camera);
+}
+
+animate();
