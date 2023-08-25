@@ -67,7 +67,7 @@ function copyAccessCode() {
 }
 
 // Event listener for the Copy Access Code button
-accessCode.addEventListener("click", copyAccessCode);
+document.getElementById("copy-access-code").addEventListener("click", copyAccessCode);
 
 // Event listener for Backstory input
 backstoryInput.addEventListener("input", () => {
