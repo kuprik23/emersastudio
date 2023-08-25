@@ -71,8 +71,8 @@ function generateAccessCode() {
 
     code += "\n        // Language Models:";
 
-    if (mersaGptjCheckbox.checked) {
-        code += "\n        // Mersa GPT-J";
+    if (EmersaGptjCheckbox.checked) {
+        code += "\n        // EMERSA GPT-J";
     }
     if (gptLlamCheckbox.checked) {
         code += "\n        // GPT-LLAM";
