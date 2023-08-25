@@ -13,10 +13,14 @@
             <div class="cube-container">
                 <div class="cube" id="cube"></div>
             </div>
-            <button id="upload-picture">Upload Picture</button>
-            <button id="connect-wallet">Connect Wallet</button>
-            <button id="polygon-optimization">Polygon Optimization</button>
-            <button id="generate-avatar">Generate Avatar</button>
+            <div class="button-container">
+                <button id="upload-picture">Upload Picture</button>
+                <button id="connect-wallet">Connect Wallet</button>
+            </div>
+            <div class="button-container">
+                <button id="generate-avatar">Generate Avatar</button>
+                <button id="generate-access-code">Generate Access Code</button>
+            </div>
         </div>
         <div class="middle">
             <h2>Backstory</h2>
@@ -34,11 +38,8 @@
                 <label for="personality">Personality:</label>
                 <input type="range" id="personality" min="1" max="3" step="0.1">
             </div>
-            <button id="generate-access-code">Generate Access Code</button>
-            <button id="copy-access-code">Copy Access Code</button>
-            <button id="rigging-options">Rigging</button>
-            <div id="rigging-window" class="hidden">
-                <h3>Rigging Options</h3>
+            <div class="rigging-container">
+                <h2>Rigging</h2>
                 <label>
                     <input type="checkbox" id="webgl"> WebGL
                 </label>
@@ -58,7 +59,7 @@
             <textarea id="access-code" readonly></textarea>
             <h2>Language Model</h2>
             <label>
-                <input type="checkbox" id="Emersa-gptj"> Emersa GPT-J
+                <input type="checkbox" id="mersa-gptj"> Mersa GPT-J
             </label>
             <label>
                 <input type="checkbox" id="gpt-llam"> GPT-LLAM
@@ -67,6 +68,9 @@
                 <input type="checkbox" id="jada"> JADA
             </label>
         </div>
+    </div>
+    <div class="warning" id="warning">
+        Please select a language model, rigging option, and pass polygon optimization. Select personality, size, and color.
     </div>
     <script src="script.js"></script>
 </body>

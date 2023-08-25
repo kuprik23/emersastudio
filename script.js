@@ -3,22 +3,19 @@ const colorInput = document.getElementById("color");
 const sizeSlider = document.getElementById("size");
 const personalitySlider = document.getElementById("personality");
 const generateAccessCodeButton = document.getElementById("generate-access-code");
-const copyAccessCodeButton = document.getElementById("copy-access-code");
+const generateAvatarButton = document.getElementById("generate-avatar");
 const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
-const polygonOptimizationButton = document.getElementById("polygon-optimization");
-const generateAvatarButton = document.getElementById("generate-avatar");
-const riggingOptionsButton = document.getElementById("rigging-options");
-const riggingWindow = document.getElementById("rigging-window");
 const webglCheckbox = document.getElementById("webgl");
 const unityCheckbox = document.getElementById("unity");
 const threejsCheckbox = document.getElementById("threejs");
 const unrealCheckbox = document.getElementById("unreal");
-const EmersaGptjCheckbox = document.getElementById("Emersa-gptj");
+const mersaGptjCheckbox = document.getElementById("mersa-gptj");
 const gptLlamCheckbox = document.getElementById("gpt-llam");
 const jadaCheckbox = document.getElementById("jada");
+const warningWindow = document.getElementById("warning");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -43,6 +40,16 @@ function generateAccessCode() {
     const sizeValue = sizeSlider.value;
     const personalityValue = personalitySlider.value;
     const backstory = backstoryInput.value;
+
+    // Check if language model, rigging option, and polygon optimization are selected
+    const languageModelSelected = mersaGptjCheckbox.checked || gptLlamCheckbox.checked || jadaCheckbox.checked;
+    const riggingOptionSelected = webglCheckbox.checked || unityCheckbox.checked || threejsCheckbox.checked || unrealCheckbox.checked;
+    const polygonOptimized = true; // Implement polygon optimization logic
+
+    if (!languageModelSelected || !riggingOptionSelected || !polygonOptimized) {
+        warningWindow.style.display = "block";
+        return;
+    }
 
     // Generate access code based on the slider values and options
     let code = `
@@ -71,8 +78,8 @@ function generateAccessCode() {
 
     code += "\n        // Language Models:";
 
-    if (EmersaGptjCheckbox.checked) {
-        code += "\n        // EMERSA GPT-J";
+    if (mersaGptjCheckbox.checked) {
+        code += "\n        // Mersa GPT-J";
     }
     if (gptLlamCheckbox.checked) {
         code += "\n        // GPT-LLAM";
@@ -85,6 +92,7 @@ function generateAccessCode() {
     
     // Display the generated access code
     accessCode.value = code;
+    warningWindow.style.display = "none"; // Hide the warning
 }
 
 // Event listener for the Generate Access Code button
@@ -97,7 +105,7 @@ function copyAccessCode() {
 }
 
 // Event listener for the Copy Access Code button
-copyAccessCodeButton.addEventListener("click", copyAccessCode);
+generateAccessCodeButton.addEventListener("click", copyAccessCode);
 
 // Event listener for Backstory input
 backstoryInput.addEventListener("input", () => {
@@ -124,25 +132,16 @@ function connectWallet() {
 // Event listener for Connect Wallet button
 connectWalletButton.addEventListener("click", connectWallet);
 
-// Toggle rigging options window visibility
-riggingOptionsButton.addEventListener("click", () => {
-    riggingWindow.classList.toggle("hidden");
-});
-
-// Function to handle polygon optimization
-function optimizePolygon() {
-    // Implement polygon optimization logic here
-    console.log("Polygon optimized");
+// Toggle warning message visibility
+function toggleWarningVisibility() {
+    warningWindow.style.display = "none";
 }
 
-// Event listener for Polygon Optimization button
-polygonOptimizationButton.addEventListener("click", optimizePolygon);
-
-// Function to generate avatar
-function generateAvatar() {
-    // Implement avatar generation logic here
-    console.log("Avatar generated");
-}
-
-// Event listener for Generate Avatar button
-generateAvatarButton.addEventListener("click", generateAvatar);
+// Event listeners for the checkboxes to update the warning message
+mersaGptjCheckbox.addEventListener("change", toggleWarningVisibility);
+gptLlamCheckbox.addEventListener("change", toggleWarningVisibility);
+jadaCheckbox.addEventListener("change", toggleWarningVisibility);
+webglCheckbox.addEventListener("change", toggleWarningVisibility);
+unityCheckbox.addEventListener("change", toggleWarningVisibility);
+threejsCheckbox.addEventListener("change", toggleWarningVisibility);
+unrealCheckbox.addEventListener("change", toggleWarningVisibility);
