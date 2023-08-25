@@ -16,7 +16,7 @@ const webglCheckbox = document.getElementById("webgl");
 const unityCheckbox = document.getElementById("unity");
 const threejsCheckbox = document.getElementById("threejs");
 const unrealCheckbox = document.getElementById("unreal");
-const mersaGptjCheckbox = document.getElementById("mersa-gptj");
+const EmersaGptjCheckbox = document.getElementById("Emersa-gptj");
 const gptLlamCheckbox = document.getElementById("gpt-llam");
 const jadaCheckbox = document.getElementById("jada");
 
