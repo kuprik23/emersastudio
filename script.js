@@ -9,7 +9,6 @@ const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
 const polygonOptimizationButton = document.getElementById("polygon-optimization");
 const warningWindow = document.getElementById("warning");
-const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -23,16 +22,19 @@ function updateCube() {
     cube.style.borderRadius = `${personalityValue * 10}%`;
 }
 
+// Event listeners for input changes
+colorInput.addEventListener("input", updateCube);
+sizeSlider.addEventListener("input", updateCube);
+personalitySlider.addEventListener("input", updateCube);
+
 // Function to update the language model selection
 function updateLanguageModelSelection() {
     let selectedModels = [];
+    const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input:checked");
     languageModelCheckboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-            selectedModels.push(checkbox.id);
-        }
+        selectedModels.push(checkbox.id);
     });
-
-    return selectedModels.join(", ");
+    return selectedModels;
 }
 
 // Function to check if all conditions are met and generate the access code
@@ -40,7 +42,7 @@ function checkConditions() {
     const backstory = backstoryInput.value.trim();
     const selectedModels = updateLanguageModelSelection();
 
-    if (!selectedModels || !backstory || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
+    if (!selectedModels.length || !backstory || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
         warningWindow.style.display = "block"; // Display the warning
         return;
     } else {
@@ -57,18 +59,13 @@ function checkConditions() {
         // Backstory:
         // "${backstory}"
         
-        // Language Model(s): ${selectedModels}
+        // Language Model(s): ${selectedModels.join(", ")}
         
         // Use this code to access your custom avatar.`;
 
     // Display the generated access code
     accessCode.value = code;
 }
-
-// Event listeners for input changes
-colorInput.addEventListener("input", updateCube);
-sizeSlider.addEventListener("input", updateCube);
-personalitySlider.addEventListener("input", updateCube);
 
 // Event listener for Generate Access Code button
 generateAccessCodeButton.addEventListener("click", checkConditions);
@@ -84,13 +81,4 @@ backstoryInput.addEventListener("input", () => {
     if (backstoryInput.value.trim() !== "") {
         warningWindow.style.display = "none"; // Hide the warning
     }
-});
-
-// Event listeners for language model checkboxes
-languageModelCheckboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-            warningWindow.style.display = "none"; // Hide the warning when a checkbox is selected
-        }
-    });
 });
