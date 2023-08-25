@@ -38,44 +38,43 @@ function updateLanguageModelSelection() {
     return selectedModels;
 }
 
-// Function to check if all conditions are met and generate the access code
-function checkConditions() {
+// Function to copy access code to clipboard
+function copyAccessCode() {
+    accessCode.select();
+    document.execCommand("copy");
+}
+
+// Event listener for Generate Access Code button
+generateAccessCodeButton.addEventListener("click", () => {
     const backstory = backstoryInput.value.trim();
     const selectedModels = updateLanguageModelSelection();
 
     if (!selectedModels.length || !backstory || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
         warningWindow.style.display = "block"; // Display the warning
-        return;
     } else {
         warningWindow.style.display = "none"; // Hide the warning
+
+        // Generate access code based on the slider values, options, and backstory
+        let code = `
+            // Access Code for Your Custom Avatar:
+            // Color: "${colorInput.value}"
+            // Size: ${sizeSlider.value}
+            // Personality: ${personalitySlider.value}
+            
+            // Backstory:
+            // "${backstory}"
+            
+            // Language Model(s): ${selectedModels.join(", ")}
+            
+            // Use this code to access your custom avatar.`;
+
+        // Display the generated access code
+        accessCode.value = code;
     }
-
-    // Generate access code based on the slider values, options, and backstory
-    let code = `
-        // Access Code for Your Custom Avatar:
-        // Color: "${colorInput.value}"
-        // Size: ${sizeSlider.value}
-        // Personality: ${personalitySlider.value}
-        
-        // Backstory:
-        // "${backstory}"
-        
-        // Language Model(s): ${selectedModels.join(", ")}
-        
-        // Use this code to access your custom avatar.`;
-
-    // Display the generated access code
-    accessCode.value = code;
-}
-
-// Event listener for Generate Access Code button
-generateAccessCodeButton.addEventListener("click", checkConditions);
+});
 
 // Event listener for Copy Access Code button
-document.getElementById("copy-access-code").addEventListener("click", () => {
-    accessCode.select();
-    document.execCommand("copy");
-});
+document.getElementById("copy-access-code").addEventListener("click", copyAccessCode);
 
 // Event listener for Backstory input
 backstoryInput.addEventListener("input", () => {
