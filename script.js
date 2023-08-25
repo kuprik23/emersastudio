@@ -8,6 +8,7 @@ const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
+const polygonOptimizationButton = document.getElementById("polygon-optimization");
 const webglCheckbox = document.getElementById("webgl");
 const unityCheckbox = document.getElementById("unity");
 const threejsCheckbox = document.getElementById("threejs");
@@ -34,29 +35,50 @@ colorInput.addEventListener("input", updateCube);
 sizeSlider.addEventListener("input", updateCube);
 personalitySlider.addEventListener("input", updateCube);
 
-// Function to generate access code based on the slider values and options
-function generateAccessCode() {
-    const colorValue = colorInput.value;
-    const sizeValue = sizeSlider.value;
-    const personalityValue = personalitySlider.value;
-    const backstory = backstoryInput.value;
-
-    // Check if language model, rigging option, and polygon optimization are selected
+// Function to check if all conditions are met
+function checkConditions() {
     const languageModelSelected = mersaGptjCheckbox.checked || gptLlamCheckbox.checked || jadaCheckbox.checked;
     const riggingOptionSelected = webglCheckbox.checked || unityCheckbox.checked || threejsCheckbox.checked || unrealCheckbox.checked;
     const polygonOptimized = true; // Implement polygon optimization logic
+    const backstory = backstoryInput.value;
 
-    if (!languageModelSelected || !riggingOptionSelected || !polygonOptimized) {
-        warningWindow.style.display = "block";
+    if (!languageModelSelected || !riggingOptionSelected || !polygonOptimized || !backstory.trim()) {
+        warningWindow.style.display = "block"; // Display the warning
+        // Highlight the buttons
+        if (!languageModelSelected) {
+            mersaGptjCheckbox.parentElement.style.backgroundColor = "red";
+            gptLlamCheckbox.parentElement.style.backgroundColor = "red";
+            jadaCheckbox.parentElement.style.backgroundColor = "red";
+        }
+        if (!riggingOptionSelected) {
+            webglCheckbox.parentElement.style.backgroundColor = "red";
+            unityCheckbox.parentElement.style.backgroundColor = "red";
+            threejsCheckbox.parentElement.style.backgroundColor = "red";
+            unrealCheckbox.parentElement.style.backgroundColor = "red";
+        }
+        if (!polygonOptimized) {
+            polygonOptimizationButton.style.backgroundColor = "red";
+        }
         return;
+    } else {
+        warningWindow.style.display = "none"; // Hide the warning
+        // Remove button highlighting
+        mersaGptjCheckbox.parentElement.style.backgroundColor = "";
+        gptLlamCheckbox.parentElement.style.backgroundColor = "";
+        jadaCheckbox.parentElement.style.backgroundColor = "";
+        webglCheckbox.parentElement.style.backgroundColor = "";
+        unityCheckbox.parentElement.style.backgroundColor = "";
+        threejsCheckbox.parentElement.style.backgroundColor = "";
+        unrealCheckbox.parentElement.style.backgroundColor = "";
+        polygonOptimizationButton.style.backgroundColor = "";
     }
 
     // Generate access code based on the slider values and options
     let code = `
         // Access Code for Your Custom Avatar:
-        // Color: "${colorValue}"
-        // Size: ${sizeValue}
-        // Personality: ${personalityValue}
+        // Color: "${colorInput.value}"
+        // Size: ${sizeSlider.value}
+        // Personality: ${personalitySlider.value}
         
         // Backstory:
         // "${backstory}"
@@ -76,7 +98,7 @@ function generateAccessCode() {
         code += "\n        // Unreal";
     }
 
-    code += "\n        // Language Models:";
+    code += "\n\n        // Language Models:";
 
     if (mersaGptjCheckbox.checked) {
         code += "\n        // Mersa GPT-J";
@@ -92,11 +114,10 @@ function generateAccessCode() {
     
     // Display the generated access code
     accessCode.value = code;
-    warningWindow.style.display = "none"; // Hide the warning
 }
 
-// Event listener for the Generate Access Code button
-generateAccessCodeButton.addEventListener("click", generateAccessCode);
+// Event listener for Generate Access Code button
+generateAccessCodeButton.addEventListener("click", checkConditions);
 
 // Function to copy generated access code to the clipboard
 function copyAccessCode() {
@@ -105,43 +126,24 @@ function copyAccessCode() {
 }
 
 // Event listener for the Copy Access Code button
-generateAccessCodeButton.addEventListener("click", copyAccessCode);
+generateAvatarButton.addEventListener("click", copyAccessCode);
+
+// Function to handle Backstory input
+function handleBackstory() {
+    const backstory = backstoryInput.value;
+    if (!backstory.trim()) {
+        warningWindow.style.display = "block"; // Display the warning
+        warningWindow.innerHTML = "<p>Please provide a backstory.</p>";
+    } else {
+        warningWindow.style.display = "none"; // Hide the warning
+    }
+}
 
 // Event listener for Backstory input
-backstoryInput.addEventListener("input", () => {
-    // Store the backstory text if needed
-    const backstory = backstoryInput.value;
-    console.log("Backstory:", backstory);
+backstoryInput.addEventListener("input", handleBackstory);
+
+// Event listener for Polygon Optimization button
+polygonOptimizationButton.addEventListener("click", () => {
+    // Implement polygon optimization logic here
+    polygonOptimizationButton.style.backgroundColor = ""; // Remove highlighting
 });
-
-// Function to handle picture upload
-function uploadPicture() {
-    // Implement picture upload logic here
-    console.log("Picture uploaded");
-}
-
-// Event listener for Upload Picture button
-uploadPictureButton.addEventListener("click", uploadPicture);
-
-// Function to handle wallet connection
-function connectWallet() {
-    // Implement wallet connection logic here
-    console.log("Wallet connected");
-}
-
-// Event listener for Connect Wallet button
-connectWalletButton.addEventListener("click", connectWallet);
-
-// Toggle warning message visibility
-function toggleWarningVisibility() {
-    warningWindow.style.display = "none";
-}
-
-// Event listeners for the checkboxes to update the warning message
-mersaGptjCheckbox.addEventListener("change", toggleWarningVisibility);
-gptLlamCheckbox.addEventListener("change", toggleWarningVisibility);
-jadaCheckbox.addEventListener("change", toggleWarningVisibility);
-webglCheckbox.addEventListener("change", toggleWarningVisibility);
-unityCheckbox.addEventListener("change", toggleWarningVisibility);
-threejsCheckbox.addEventListener("change", toggleWarningVisibility);
-unrealCheckbox.addEventListener("change", toggleWarningVisibility);
