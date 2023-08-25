@@ -7,14 +7,6 @@ const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
-const polygonOptimizationButton = document.getElementById("polygon-optimization");
-const webglCheckbox = document.getElementById("webgl");
-const unityCheckbox = document.getElementById("unity");
-const threejsCheckbox = document.getElementById("threejs");
-const unrealCheckbox = document.getElementById("unreal");
-const mersaGptjCheckbox = document.getElementById("mersa-gptj");
-const gptLlamCheckbox = document.getElementById("gpt-llam");
-const jadaCheckbox = document.getElementById("jada");
 const warningWindow = document.getElementById("warning");
 
 // Function to update the cube's color, size, and shape based on the slider values
@@ -36,12 +28,10 @@ personalitySlider.addEventListener("input", updateCube);
 
 // Function to check if all conditions are met
 function checkConditions() {
-    const languageModelSelected = mersaGptjCheckbox.checked || gptLlamCheckbox.checked || jadaCheckbox.checked;
-    const riggingOptionSelected = webglCheckbox.checked || unityCheckbox.checked || threejsCheckbox.checked || unrealCheckbox.checked;
-    const polygonOptimized = true; // Implement polygon optimization logic
+    const languageModelSelected = document.querySelector(".checkbox-container input:checked");
     const backstory = backstoryInput.value;
 
-    if (!languageModelSelected || !riggingOptionSelected || !polygonOptimized || !backstory.trim() || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
+    if (!languageModelSelected || !backstory.trim() || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
         warningWindow.style.display = "block"; // Display the warning
         return;
     } else {
@@ -58,37 +48,12 @@ function checkConditions() {
         // Backstory:
         // "${backstory}"
         
-        // Rigging Options:`;
-
-    if (webglCheckbox.checked) {
-        code += "\n        // WebGL";
-    }
-    if (unityCheckbox.checked) {
-        code += "\n        // Unity";
-    }
-    if (threejsCheckbox.checked) {
-        code += "\n        // Three.js";
-    }
-    if (unrealCheckbox.checked) {
-        code += "\n        // Unreal";
-    }
-
-    code += "\n\n        // Language Models:";
-
-    if (mersaGptjCheckbox.checked) {
-        code += "\n        // Mersa GPT-J";
-    }
-    if (gptLlamCheckbox.checked) {
-        code += "\n        // GPT-LLAM";
-    }
-    if (jadaCheckbox.checked) {
-        code += "\n        // JADA";
-    }
-
-    code += "\n\n        // Use this code to access your custom avatar.";
+        // Language Model: ${languageModelSelected.id}
+        
+        // Use this code to access your custom avatar.`;
 
     // Display the generated access code
-    accessCode.innerHTML = code;
+    accessCode.value = code;
 }
 
 // Event listener for Generate Access Code button
@@ -101,23 +66,21 @@ function copyAccessCode() {
 }
 
 // Event listener for the Copy Access Code button
-generateAccessCodeButton.addEventListener("click", copyAccessCode);
-
-// Function to handle Backstory input
-function handleBackstory() {
-    const backstory = backstoryInput.value;
-    if (!backstory.trim()) {
-        warningWindow.style.display = "block"; // Display the warning
-        return;
-    } else {
-        warningWindow.style.display = "none"; // Hide the warning
-    }
-}
+accessCode.addEventListener("click", copyAccessCode);
 
 // Event listener for Backstory input
-backstoryInput.addEventListener("input", handleBackstory);
+backstoryInput.addEventListener("input", () => {
+    if (backstoryInput.value.trim() !== "") {
+        warningWindow.style.display = "none"; // Hide the warning
+    }
+});
 
-// Event listener for Polygon Optimization button
-polygonOptimizationButton.addEventListener("click", () => {
-    // Implement polygon optimization logic here
+// Event listeners for language model checkboxes
+const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input");
+languageModelCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            warningWindow.style.display = "none"; // Hide the warning when a checkbox is selected
+        }
+    });
 });
