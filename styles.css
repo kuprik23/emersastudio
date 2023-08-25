@@ -1,6 +1,6 @@
 body {
     font-family: 'Courier New', monospace;
-    background-color: black;
+    background-color: #333;
     color: white;
     margin: 0;
     padding: 0;
@@ -12,7 +12,9 @@ body {
 
 .container {
     display: flex;
-    background-color: black;
+    background-color: #333;
+    border: 1px solid #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .left {
@@ -33,11 +35,13 @@ body {
 h1 {
     font-size: 36px;
     text-align: center;
+    color: #00ff00;
 }
 
 h2 {
     font-size: 24px;
     margin-top: 20px;
+    color: #00ff00;
 }
 
 textarea, input[type="color"] {
