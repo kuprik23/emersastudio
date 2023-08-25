@@ -9,6 +9,7 @@ const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
 const polygonOptimizationButton = document.getElementById("polygon-optimization");
 const warningWindow = document.getElementById("warning");
+const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -22,17 +23,24 @@ function updateCube() {
     cube.style.borderRadius = `${personalityValue * 10}%`;
 }
 
-// Event listeners for input changes
-colorInput.addEventListener("input", updateCube);
-sizeSlider.addEventListener("input", updateCube);
-personalitySlider.addEventListener("input", updateCube);
+// Function to update the language model selection
+function updateLanguageModelSelection() {
+    let selectedModels = [];
+    languageModelCheckboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            selectedModels.push(checkbox.id);
+        }
+    });
+
+    return selectedModels.join(", ");
+}
 
 // Function to check if all conditions are met and generate the access code
 function checkConditions() {
-    const languageModelSelected = document.querySelector(".checkbox-container input:checked");
-    const backstory = backstoryInput.value;
+    const backstory = backstoryInput.value.trim();
+    const selectedModels = updateLanguageModelSelection();
 
-    if (!languageModelSelected || !backstory.trim() || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
+    if (!selectedModels || !backstory || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
         warningWindow.style.display = "block"; // Display the warning
         return;
     } else {
@@ -49,7 +57,7 @@ function checkConditions() {
         // Backstory:
         // "${backstory}"
         
-        // Language Model: ${languageModelSelected.id}
+        // Language Model(s): ${selectedModels}
         
         // Use this code to access your custom avatar.`;
 
@@ -57,17 +65,19 @@ function checkConditions() {
     accessCode.value = code;
 }
 
+// Event listeners for input changes
+colorInput.addEventListener("input", updateCube);
+sizeSlider.addEventListener("input", updateCube);
+personalitySlider.addEventListener("input", updateCube);
+
 // Event listener for Generate Access Code button
 generateAccessCodeButton.addEventListener("click", checkConditions);
 
-// Function to copy generated access code to the clipboard
-function copyAccessCode() {
+// Event listener for Copy Access Code button
+document.getElementById("copy-access-code").addEventListener("click", () => {
     accessCode.select();
     document.execCommand("copy");
-}
-
-// Event listener for the Copy Access Code button
-document.getElementById("copy-access-code").addEventListener("click", copyAccessCode);
+});
 
 // Event listener for Backstory input
 backstoryInput.addEventListener("input", () => {
@@ -77,7 +87,6 @@ backstoryInput.addEventListener("input", () => {
 });
 
 // Event listeners for language model checkboxes
-const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input");
 languageModelCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
         if (checkbox.checked) {
