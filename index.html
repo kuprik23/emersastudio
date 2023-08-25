@@ -15,6 +15,8 @@
             </div>
             <button id="upload-picture">Upload Picture</button>
             <button id="connect-wallet">Connect Wallet</button>
+            <button id="polygon-optimization">Polygon Optimization</button>
+            <button id="generate-avatar">Generate Avatar</button>
         </div>
         <div class="middle">
             <h2>Backstory</h2>
@@ -34,10 +36,36 @@
             </div>
             <button id="generate-access-code">Generate Access Code</button>
             <button id="copy-access-code">Copy Access Code</button>
+            <button id="rigging-options">Rigging</button>
+            <div id="rigging-window" class="hidden">
+                <h3>Rigging Options</h3>
+                <label>
+                    <input type="checkbox" id="webgl"> WebGL
+                </label>
+                <label>
+                    <input type="checkbox" id="unity"> Unity
+                </label>
+                <label>
+                    <input type="checkbox" id="threejs"> Three.js
+                </label>
+                <label>
+                    <input type="checkbox" id="unreal"> Unreal
+                </label>
+            </div>
         </div>
         <div class="right">
             <h2>Access Code</h2>
             <textarea id="access-code" readonly></textarea>
+            <h2>Language Model</h2>
+            <label>
+                <input type="checkbox" id="mersa-gptj"> Mersa GPT-J
+            </label>
+            <label>
+                <input type="checkbox" id="gpt-llam"> GPT-LLAM
+            </label>
+            <label>
+                <input type="checkbox" id="jada"> JADA
+            </label>
         </div>
     </div>
     <script src="script.js"></script>

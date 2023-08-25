@@ -8,6 +8,17 @@ const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
+const polygonOptimizationButton = document.getElementById("polygon-optimization");
+const generateAvatarButton = document.getElementById("generate-avatar");
+const riggingOptionsButton = document.getElementById("rigging-options");
+const riggingWindow = document.getElementById("rigging-window");
+const webglCheckbox = document.getElementById("webgl");
+const unityCheckbox = document.getElementById("unity");
+const threejsCheckbox = document.getElementById("threejs");
+const unrealCheckbox = document.getElementById("unreal");
+const mersaGptjCheckbox = document.getElementById("mersa-gptj");
+const gptLlamCheckbox = document.getElementById("gpt-llam");
+const jadaCheckbox = document.getElementById("jada");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -26,22 +37,52 @@ colorInput.addEventListener("input", updateCube);
 sizeSlider.addEventListener("input", updateCube);
 personalitySlider.addEventListener("input", updateCube);
 
-// Function to generate access code based on the slider values
+// Function to generate access code based on the slider values and options
 function generateAccessCode() {
     const colorValue = colorInput.value;
     const sizeValue = sizeSlider.value;
     const personalityValue = personalitySlider.value;
+    const backstory = backstoryInput.value;
 
-    // Generate access code based on the slider values
-    const code = `
+    // Generate access code based on the slider values and options
+    let code = `
         // Access Code for Your Custom Avatar:
         // Color: "${colorValue}"
         // Size: ${sizeValue}
         // Personality: ${personalityValue}
         
-        // Use this code to access your custom avatar.
-    `;
+        // Backstory:
+        // "${backstory}"
+        
+        // Rigging Options:`;
 
+    if (webglCheckbox.checked) {
+        code += "\n        // WebGL";
+    }
+    if (unityCheckbox.checked) {
+        code += "\n        // Unity";
+    }
+    if (threejsCheckbox.checked) {
+        code += "\n        // Three.js";
+    }
+    if (unrealCheckbox.checked) {
+        code += "\n        // Unreal";
+    }
+
+    code += "\n        // Language Models:";
+
+    if (mersaGptjCheckbox.checked) {
+        code += "\n        // Mersa GPT-J";
+    }
+    if (gptLlamCheckbox.checked) {
+        code += "\n        // GPT-LLAM";
+    }
+    if (jadaCheckbox.checked) {
+        code += "\n        // JADA";
+    }
+
+    code += "\n\n        // Use this code to access your custom avatar.";
+    
     // Display the generated access code
     accessCode.value = code;
 }
@@ -82,3 +123,26 @@ function connectWallet() {
 
 // Event listener for Connect Wallet button
 connectWalletButton.addEventListener("click", connectWallet);
+
+// Toggle rigging options window visibility
+riggingOptionsButton.addEventListener("click", () => {
+    riggingWindow.classList.toggle("hidden");
+});
+
+// Function to handle polygon optimization
+function optimizePolygon() {
+    // Implement polygon optimization logic here
+    console.log("Polygon optimized");
+}
+
+// Event listener for Polygon Optimization button
+polygonOptimizationButton.addEventListener("click", optimizePolygon);
+
+// Function to generate avatar
+function generateAvatar() {
+    // Implement avatar generation logic here
+    console.log("Avatar generated");
+}
+
+// Event listener for Generate Avatar button
+generateAvatarButton.addEventListener("click", generateAvatar);
