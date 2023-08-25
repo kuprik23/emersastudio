@@ -9,6 +9,7 @@ const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
 const polygonOptimizationButton = document.getElementById("polygon-optimization");
 const warningWindow = document.getElementById("warning");
+const languageModelCheckboxes = document.querySelectorAll(".language-model:checked");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -30,7 +31,7 @@ personalitySlider.addEventListener("input", updateCube);
 // Function to update the language model selection
 function updateLanguageModelSelection() {
     let selectedModels = [];
-    const languageModelCheckboxes = document.querySelectorAll(".checkbox-container input:checked");
+    const languageModelCheckboxes = document.querySelectorAll(".language-model:checked");
     languageModelCheckboxes.forEach((checkbox) => {
         selectedModels.push(checkbox.id);
     });
