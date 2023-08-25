@@ -16,7 +16,6 @@ const mersaGptjCheckbox = document.getElementById("mersa-gptj");
 const gptLlamCheckbox = document.getElementById("gpt-llam");
 const jadaCheckbox = document.getElementById("jada");
 const warningWindow = document.getElementById("warning");
-const popup = document.getElementById("popup");
 
 // Function to update the cube's color, size, and shape based on the slider values
 function updateCube() {
@@ -43,76 +42,10 @@ function checkConditions() {
     const backstory = backstoryInput.value;
 
     if (!languageModelSelected || !riggingOptionSelected || !polygonOptimized || !backstory.trim() || !colorInput.value || !sizeSlider.value || !personalitySlider.value) {
-        popup.style.display = "block"; // Display the warning
-        // Highlight the specific items that need attention
-        if (!languageModelSelected) {
-            mersaGptjCheckbox.parentElement.style.backgroundColor = "red";
-            gptLlamCheckbox.parentElement.style.backgroundColor = "red";
-            jadaCheckbox.parentElement.style.backgroundColor = "red";
-        } else {
-            mersaGptjCheckbox.parentElement.style.backgroundColor = "";
-            gptLlamCheckbox.parentElement.style.backgroundColor = "";
-            jadaCheckbox.parentElement.style.backgroundColor = "";
-        }
-
-        if (!riggingOptionSelected) {
-            webglCheckbox.parentElement.style.backgroundColor = "red";
-            unityCheckbox.parentElement.style.backgroundColor = "red";
-            threejsCheckbox.parentElement.style.backgroundColor = "red";
-            unrealCheckbox.parentElement.style.backgroundColor = "red";
-        } else {
-            webglCheckbox.parentElement.style.backgroundColor = "";
-            unityCheckbox.parentElement.style.backgroundColor = "";
-            threejsCheckbox.parentElement.style.backgroundColor = "";
-            unrealCheckbox.parentElement.style.backgroundColor = "";
-        }
-
-        if (!polygonOptimized) {
-            polygonOptimizationButton.style.backgroundColor = "red";
-        } else {
-            polygonOptimizationButton.style.backgroundColor = "";
-        }
-
-        if (!backstory.trim()) {
-            backstoryInput.style.backgroundColor = "red";
-        } else {
-            backstoryInput.style.backgroundColor = "";
-        }
-
-        if (!colorInput.value) {
-            colorInput.style.backgroundColor = "red";
-        } else {
-            colorInput.style.backgroundColor = "";
-        }
-
-        if (!sizeSlider.value) {
-            sizeSlider.style.backgroundColor = "red";
-        } else {
-            sizeSlider.style.backgroundColor = "";
-        }
-
-        if (!personalitySlider.value) {
-            personalitySlider.style.backgroundColor = "red";
-        } else {
-            personalitySlider.style.backgroundColor = "";
-        }
-
+        warningWindow.style.display = "block"; // Display the warning
         return;
     } else {
-        popup.style.display = "none"; // Hide the warning
-        // Remove highlighting
-        mersaGptjCheckbox.parentElement.style.backgroundColor = "";
-        gptLlamCheckbox.parentElement.style.backgroundColor = "";
-        jadaCheckbox.parentElement.style.backgroundColor = "";
-        webglCheckbox.parentElement.style.backgroundColor = "";
-        unityCheckbox.parentElement.style.backgroundColor = "";
-        threejsCheckbox.parentElement.style.backgroundColor = "";
-        unrealCheckbox.parentElement.style.backgroundColor = "";
-        polygonOptimizationButton.style.backgroundColor = "";
-        backstoryInput.style.backgroundColor = "";
-        colorInput.style.backgroundColor = "";
-        sizeSlider.style.backgroundColor = "";
-        personalitySlider.style.backgroundColor = "";
+        warningWindow.style.display = "none"; // Hide the warning
     }
 
     // Generate access code based on the slider values and options
@@ -174,10 +107,10 @@ generateAccessCodeButton.addEventListener("click", copyAccessCode);
 function handleBackstory() {
     const backstory = backstoryInput.value;
     if (!backstory.trim()) {
-        popup.style.display = "block"; // Display the warning
-        popup.innerHTML = "<p>Please provide a backstory.</p>";
+        warningWindow.style.display = "block"; // Display the warning
+        return;
     } else {
-        popup.style.display = "none"; // Hide the warning
+        warningWindow.style.display = "none"; // Hide the warning
     }
 }
 
@@ -187,5 +120,4 @@ backstoryInput.addEventListener("input", handleBackstory);
 // Event listener for Polygon Optimization button
 polygonOptimizationButton.addEventListener("click", () => {
     // Implement polygon optimization logic here
-    polygonOptimizationButton.style.backgroundColor = ""; // Remove highlighting
 });
