@@ -7,6 +7,7 @@ const accessCode = document.getElementById("access-code");
 const backstoryInput = document.getElementById("backstory");
 const uploadPictureButton = document.getElementById("upload-picture");
 const connectWalletButton = document.getElementById("connect-wallet");
+const polygonOptimizationButton = document.getElementById("polygon-optimization");
 const warningWindow = document.getElementById("warning");
 
 // Function to update the cube's color, size, and shape based on the slider values
@@ -26,7 +27,7 @@ colorInput.addEventListener("input", updateCube);
 sizeSlider.addEventListener("input", updateCube);
 personalitySlider.addEventListener("input", updateCube);
 
-// Function to check if all conditions are met
+// Function to check if all conditions are met and generate the access code
 function checkConditions() {
     const languageModelSelected = document.querySelector(".checkbox-container input:checked");
     const backstory = backstoryInput.value;
@@ -38,7 +39,7 @@ function checkConditions() {
         warningWindow.style.display = "none"; // Hide the warning
     }
 
-    // Generate access code based on the slider values and options
+    // Generate access code based on the slider values, options, and backstory
     let code = `
         // Access Code for Your Custom Avatar:
         // Color: "${colorInput.value}"
